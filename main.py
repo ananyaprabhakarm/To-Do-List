@@ -11,7 +11,7 @@ frame = Frame(window)
 frame.pack()
 
 # HOLDING ITEMS IN A LISTBOX
-listbox = Listbox(frame, bg="black", fg="white", height=15, width=50, font="Helvetica")
+listbox = Listbox(frame, bg="white", fg="black", height=15, width=50, font="Helvetica")
 listbox.pack(side=tkinter.LEFT)
 
 # SCROLLDOWN FUNCTION
@@ -31,3 +31,39 @@ markButton = Button(window, text="Mark as completed", width=50)
 markButton.pack(pady=3)
 
 window.mainloop()
+
+# TO DO FUNCTIONS
+def entertask():
+  input = ""
+  def add():
+    input = entry.get(1.0, "end-1c")
+    if input == "":
+      tkinter.messagebox.showwarning(title="Warning!" ,message="Enter the text")
+    else:
+      listbox.insert(END,input)
+      root1.destroy()
+
+root1 = Tk()
+root1.title("Add Task")
+entry = Text(root1, width=40, height=4)
+entry.pack()
+button = Button(root1, text="Add Task")
+button.pack()
+root1.mainloop()
+
+
+def deletetask():
+  select = listbox.curselection()
+  listbox.delete(select[0])
+
+
+def markscomplete():
+  mark = listbox.curselection()
+  temp = mark[0]
+
+  marked = listbox.get(mark)
+
+  marked = marked + " ✔"
+
+  listbox.delete(temp)
+  listbox.insert(temp,marked)
